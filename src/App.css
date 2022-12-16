@@ -8,6 +8,9 @@
   margin: 3% auto;
   border-radius: 10%;
   box-shadow: 2px 10px 15px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 3;
+
 }
 
 .title-text{
@@ -36,23 +39,36 @@
   margin: auto;
 }
 
-.home-img{
-  width: 20%;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-}
+
 
 .home-img2{
   position: fixed;
   width: 40%;
   left: -8%;
   bottom: -200px;
+  z-index: 1;
+
 }
 
 .home-img1{
   position: fixed;
-  width: 35%;
+  width: 40%;
   right: -8%;
   top: -200px;
+  z-index: 1;
+
+}
+
+.quiz-div{
+  z-index: 3;
+  position: relative;
+  display: flex;
+  background-color: #F5F7FB;
+  justify-content: center;
+  align-items: center;
+  width: 50rem;
+  height: 50rem;
+  margin: 3% auto;
+  border-radius: 10%;
+  box-shadow: 2px 10px 15px rgba(0, 0, 0, 0.15);
 }
