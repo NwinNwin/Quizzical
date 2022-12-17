@@ -10,6 +10,16 @@ export default function Quiz() {
   async function getQuizData() {
     const result = await axios.get(opentdbAPI);
     setQuizData(result.data.results);
+
+    let tempList = [];
+    while (tempList.length < 4) {
+      const x = Math.floor(Math.random() * 50);
+      if (tempList.indexOf(quizData[x]) === -1) {
+        tempList.push(result.data.results[x]);
+      }
+    }
+
+    setCurrentQuiz((prev) => tempList.map((ele) => [ele.question, ele.correct_answer, ele.incorrect_answers]));
   }
 
   function getRandom1_50() {
@@ -18,10 +28,13 @@ export default function Quiz() {
 
   function getFourQs() {
     let tempList = [];
-    for (let i = 0; i < 4; i++) {
-      const indexForQuiz = getRandom1_50();
-      tempList.push(quizData[indexForQuiz]);
+    while (tempList.length < 4) {
+      const x = Math.floor(Math.random() * 50);
+      if (tempList.indexOf(quizData[x]) === -1) {
+        tempList.push(quizData[x]);
+      }
     }
+
     setCurrentQuiz((prev) => tempList.map((ele) => [ele.question, ele.correct_answer, ele.incorrect_answers]));
     console.log(currentQuiz);
   }
@@ -34,42 +47,45 @@ export default function Quiz() {
     getQuizData();
   }, []);
 
+  function getRandom1_4_no_repeat() {
+    let temp = [];
+    while (temp.length < 4) {
+      const x = Math.floor(Math.random() * 4);
+      if (temp.indexOf(x) === -1) {
+        temp.push(x);
+      }
+    }
+    return temp;
+  }
+
+  function getChoices(ele) {
+    let temp = [ele[1], ...ele[2]];
+    return getRandom1_4_no_repeat().map((ele2) => {
+      console.log(ele);
+      return <button className="choices-btn">{temp[ele2]}</button>;
+    });
+  }
+
+  let questionsAnswers;
+  if (currentQuiz) {
+    questionsAnswers = currentQuiz.map((ele) => {
+      console.log("hi");
+      return (
+        <>
+          <h3>{ele[0]}</h3>
+          <div className="choices-div">
+            {/* map button/choices */}
+            {getChoices(ele)}
+          </div>
+          <hr />
+        </>
+      );
+    });
+  }
+  console.log(currentQuiz);
   return (
     <div className="quiz-div">
-      <div className="quiz-box">
-        <h3>Which of the following languages is used as a scripting language in the Unity 3D game engine?</h3>
-        <div className="choices-div">
-          <button className="choices-btn">Aloha</button>
-          <button className="choices-btn">Aloha</button>
-          <button className="choices-btn">Aloha</button>
-          <button className="choices-btn">Aloha</button>
-        </div>
-        <hr />
-        <h3>What was the first Android version specifically optimized for tablets?</h3>
-        <div className="choices-div">
-          <button className="choices-btn">Aloha</button>
-          <button className="choices-btn">Aloha</button>
-          <button className="choices-btn">Aloha</button>
-          <button className="choices-btn">Aloha</button>
-        </div>
-        <hr />
-        <h3>What is the number of keys on a standard Windows Keyboard?</h3>
-        <div className="choices-div">
-          <button className="choices-btn">Aloha</button>
-          <button className="choices-btn">Aloha</button>
-          <button className="choices-btn">Aloha</button>
-          <button className="choices-btn">Aloha</button>
-        </div>
-        <hr />
-        <h3>What is the number of keys on a standard Windows Keyboard?</h3>
-        <div className="choices-div">
-          <button className="choices-btn">Aloha</button>
-          <button className="choices-btn">Aloha</button>
-          <button className="choices-btn">Aloha</button>
-          <button className="choices-btn">Aloha</button>
-        </div>
-        <hr />
-      </div>
+      <div className="quiz-box">{questionsAnswers}</div>
 
       <button className="check-btn" onClick={handleNewQuiz}>
         <h3>Check Answers</h3>
