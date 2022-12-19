@@ -7,6 +7,14 @@ Inside the file "Quiz.jsx", you will find:
 
 ### What I learned:
 I got to practiced with React Hooks (useState & useEffect), JavaScript array methods(map, forEach, etc...), and how to write more with less lines of code. For example, in **setCurrentQuiz** function, I convert an object from OpenTriviaDB API with keys of "correct_answers (str)" and "incorrect_answers ([str])" into 1 array ([str]).
+```bash
+let listOfChoices = [
+          { q: ele.correct_answer, id: nanoid(), correct: true, chosen: false },
+          ...ele.incorrect_answers.map((ele3) => {
+            return { q: ele3, id: nanoid(), correct: false, chosen: false };
+          }),
+        ];
+ ```
 
 
 
