@@ -104,3 +104,25 @@ hr {
 .check-btn h3 {
   margin: 0;
 }
+
+.choices-chosen {
+  background-color: #d6dbf5;
+  border: 0;
+}
+
+.choices-btn:active {
+  background-color: #d6dbf5;
+}
+
+.restart-btn {
+  background-color: lightgreen;
+  border: 0;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 100%;
+  margin-left: 2%;
+}
+
+.check-answers {
+  margin: 0;
+}
