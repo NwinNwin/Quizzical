@@ -1,6 +1,4 @@
 import React from "react";
-import blob2 from "../images/blob2.png";
-import blobs from "../images/blobs.png";
 
 export default function Home(props) {
   return (
