@@ -79,8 +79,10 @@ export default function Quiz() {
   //1
   useEffect(() => {
     getQuizData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  console.log(quizData);
   function getRandom1_4_no_repeat() {
     let temp = [];
     while (temp.length < 4) {
